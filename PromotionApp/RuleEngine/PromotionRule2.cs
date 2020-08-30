@@ -6,20 +6,21 @@ using System.Linq;
 
 namespace PromotionApp.RuleEngine
 {
-    public class promotionRule2 : IRuleService
+    public class PromotionRule2 : IRuleService
     {
-        private string _productName;
-        private int _qty;
-        private int _price;
-        public promotionRule2(string productName, int qty, int price)
+      
+   string _productType1;
+        string _productType2;
 
+        int _price;
+
+        // when SKUtype1 and SKU type2 are bought together it is at the offer price
+        public PromotionRule2(string productType1, string productType2,int price)
         {
-            this._productName = productName;
-            this._qty = qty;
+            this._productType1=productType1;
+            this._productType2=productType2;
             this._price = price;
         }
-
-
 
         public List<string> RunRule(List<string> cart)
         {
