@@ -5,9 +5,9 @@ namespace PromotionApp.RuleEngine
 {
     public interface IRuleService
     {
-        bool IsApplicable(List<string> cart);
+        bool IsItemApplicable(List<string> cart);
 
-        List<string> Apply(List<string> cart);
-        string getPrettyMessage();
+        List<string> RunRule(List<string> cart);
+        string getMessage();
     }
 }
