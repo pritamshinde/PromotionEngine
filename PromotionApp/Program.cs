@@ -58,10 +58,10 @@ namespace PromotionApp
 
             // Print out the items that didn't belong to any rule
             Console.WriteLine();
-            Console.WriteLine("Individual Items");
+            Console.WriteLine("--Produt--");
             foreach (var item in cart)
             {
-                Console.WriteLine("Individual " + item + " for " + products.Where(x => x.productName == item).FirstOrDefault().price);
+                Console.WriteLine(item + " for " + products.Where(x => x.productName == item).FirstOrDefault().price);
             }
 
             Console.ReadKey();
@@ -73,7 +73,6 @@ namespace PromotionApp
             rules = new List<IRuleService>();
             rules.Add(new PromotionRule1("A", 3, 130));
             rules.Add(new PromotionRule2("C", "D", 30));
-
             defaultCart = new List<string>();
             defaultCart.Add("A");
             defaultCart.Add("A");
