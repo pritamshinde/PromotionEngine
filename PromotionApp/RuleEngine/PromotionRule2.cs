@@ -8,33 +8,58 @@ namespace PromotionApp.RuleEngine
 {
     public class PromotionRule2 : IRuleService
     {
-      
-   string _productType1;
-        string _productType2;
 
-        int _price;
+        private string _productType1;
+        private string _productType2;
+
+        private int _price;
 
         // when SKUtype1 and SKU type2 are bought together it is at the offer price
-        public PromotionRule2(string productType1, string productType2,int price)
+        public PromotionRule2(string productType1, string productType2, int price)
         {
-            this._productType1=productType1;
-            this._productType2=productType2;
+            this._productType1 = productType1;
+            this._productType2 = productType2;
             this._price = price;
         }
 
         public List<string> RunRule(List<string> cart)
         {
-            throw new NotImplementedException();
+
+            if (!IsItemApplicable(cart))
+            {
+                throw new Exception("Rule applied  not applicable");
+            }
+
+            List<string> newcart = new List<string>();
+            bool found1 = false, found2 = false;
+
+            //Delete required number of items consumed by the rule; return the rest;
+            foreach (var item in cart)
+            {
+                if (item == _productType1 && !found1)
+                {
+                    found1 = true;
+                    continue;
+                }
+                if (item == _productType2 && !found2)
+                {
+                    found2 = true;
+                    continue;
+                }
+                newcart.Add(item);
+            }
+            return newcart;
         }
 
         public string getMessage()
         {
-            throw new NotImplementedException();
+            return "Rule Applied: (" + _productType1 + " + " + _productType2 + ") for " + _price;
         }
 
         public bool IsItemApplicable(List<string> cart)
         {
-            throw new NotImplementedException();
+
+            return cart.Any(x => x == _productType1) && cart.Any(x => x == _productType2);
         }
     }
 
